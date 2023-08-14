@@ -18,4 +18,17 @@
   
   </div>
 </div>
+<h4>Comments</h4>
+{% for comment in post.post_comment.all %}
+<p>{{comment.comment}}  by {{comment.user.get_full_name|title}}</p>
+{% endfor %}
+<form action="{% url 'comments:add_comment' post.id %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group mb-3">
+      <label for="exampleTextarea" class="form-label mt-4">Add Comment</label>
+      <textarea class="form-control" id="exampleTextarea" rows="3" spellcheck="false" name="comment"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Add Comment</button>
+
+</form>
 {% endblock %}

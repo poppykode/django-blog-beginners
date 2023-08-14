@@ -6,7 +6,6 @@ from .models import Post
 from .forms import PostForm
 
 # Create your views here.
-@login_required
 def posts(request):
     template_name = 'posts.html'
     posts = Post.objects.all()[:2]
@@ -16,7 +15,6 @@ def posts(request):
     }
     return render(request,template_name,data)
 
-@login_required
 def post(request,blog_id):
     template_name = 'post_details.html'
     post = Post.objects.get(id=blog_id)
@@ -25,7 +23,6 @@ def post(request,blog_id):
     }
     return render(request, template_name,context)
 
-@login_required
 def add_post(request):
     template_name = 'add_post.html'
     
@@ -47,7 +44,6 @@ def add_post(request):
     form = PostForm()
     return render(request, template_name,{'form':form})
 
-@login_required
 def delete_post(request, id):
     template_name = 'delete_post.html'
     obj = Post.objects.get(id=id)
