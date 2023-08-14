@@ -1,0 +1,48 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Add Post{% endblock %}
+{% block content %}
+<div class="row">
+
+    <div class="col-md-6 offset-md-3">
+        <form action="{% url 'posts:add_post' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+<!-- 
+            <div class="row">
+              <div class="col-md-6">
+                {{ form.title|as_crispy_field}}
+              </div>
+              <div class="col-md-6">
+                {{ form.image|as_crispy_field}}
+              </div>
+            </div> -->
+            {{form|crispy}}
+          
+            <!-- <div class="form-group mb-3">
+                <label for="title" class="form-label mt-4">Upload Image</label>
+                <input type="file" class="form-control" required  name="image">
+               
+              </div>
+              <div class="form-group mb-3">
+                <label for="title" class="form-label mt-4">Title</label>
+                <input type="text" class="form-control" id="title"  placeholder="Enter title" name="title">
+               
+              </div>
+              <div class="form-group mb-3">
+                <label for="description" class="form-label mt-4">Description</label>
+                <textarea name="description">
+
+                </textarea>
+              </div> -->
+              <button type="submit" class="btn btn-primary">Submit</button>
+           
+          </form>
+
+    </div>
+</div>
+
+
+  {% endblock %}

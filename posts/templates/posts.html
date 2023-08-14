@@ -1,0 +1,54 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Posts{% endblock %}
+{% block content %}
+
+
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+    </button>
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="row my-3">
+    {% if request.user.is_admin %}
+    <a href="{% url 'posts:add_post' %}" class="btn btn-success">add Post</a>
+    {% endif %}
+</div>
+<div class="row">
+  {% for post in posts %}
+  <div class="col-md-4">
+      <div class="card mb-3">
+          <div class="card-body">
+          <h5 class="card-title">{{post.title|title}}</h5>
+          <small>Created by: {{post.user.get_full_name|title}}</small>
+          {% if request.user.id == post.user.id %}
+          <p><a href="{% url 'posts:delete_post' post.id %}">Delete</a></p>
+          {% else %}
+           <p></p>
+          {% endif %}
+          <h6 class="card-subtitle text-muted">Date Posted: {{post.timestamp}} </h6>
+          </div>
+         <img src="{{post.image.url}}" class="img-fluid" alt="{{post.title}}" style="height:200px;">
+          <div class="card-body">
+          <p class="card-text">{{post.description|title|truncatechars:9}}..</p>
+          </div>
+      
+          <div class="card-body">
+          <a href="{% url 'posts:post' post.id %}" class="card-link btn btn-success">View More</a>
+          </div>
+          <div class="card-footer text-muted">
+              {{post.timestamp|timesince}}
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

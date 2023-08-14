@@ -1,0 +1,43 @@
+{% extends 'auth_shared.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="row">
+
+  <div class="col-md-6 offset-md-3">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+      <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+      </button>
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <form action="{% url 'accounts:login' %}" method="POST">
+      {% csrf_token %}
+
+
+      <div class="form-group mb-3">
+        <label for="username" class="form-label mt-4">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="password" class="form-label mt-4">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a href="{% url 'accounts:register' 'user' %}">Register</a>
+
+    </form>
+
+  </div>
+</div>
+
+
+{% endblock %}

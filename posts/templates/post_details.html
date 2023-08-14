@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Details{% endblock %}
+{% block content %}
+
+<div class="card border-primary mb-3">
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-md-4">
+        <img src="{{post.image.url}}" class="img-fluid" alt="{{post.title}}" style="height:200px;">
+      </div>
+      <div class="col-md-8">
+        <h4 class="card-title">{{post.title|title}}</h4>
+        <p class="card-text">{{post.description}}</p>
+      </div>
+    </div>
+  
+  </div>
+</div>
+{% endblock %}
